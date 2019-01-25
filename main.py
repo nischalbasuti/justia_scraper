@@ -45,7 +45,10 @@ def get_case_pdf_links(years):
         case_page = urlopen(case_url) 
         case_soup = BeautifulSoup(case_page, 'html.parser')
 
-        pdf_urls.append('https:'+case_soup.findAll('a', attrs={'class', 'pdf-icon pull-right has-margin-bottom-20'})[0]['href'])
+        try:
+            pdf_urls.append('https:'+case_soup.findAll('a', attrs={'class', 'pdf-icon pull-right has-margin-bottom-20'})[0]['href'])
+        except Exception as e:
+            print("Error occured", str(e))
 
     return pdf_urls
 
